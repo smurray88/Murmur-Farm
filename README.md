@@ -16,7 +16,6 @@ A modern, mobile-first redesign of [murmurfarm.com](https://murmurfarm.com) — 
 
 ## Common edits
 - **Brand colors:** the first lines of `assets/styles.css` (`--green`, `--orange`).
-- **Header, footer and menu:** `assets/site.js` (shared by every page).
 - **Stud fees and stats:** edit the stallion page and the matching card in `index.html`.
 - **Add photos:** put the image in `photos/`, then add a line to the `PHOTOS` list near the bottom of `gallery.html`.
 - **Horses for sale:** replace the "No horses for sale" box in `for-sale.html`.
