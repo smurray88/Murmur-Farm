@@ -175,7 +175,9 @@ p { margin: 0 0 1em; }
 }
 .stallion-visual.chestnut { background: radial-gradient(circle at 30% 20%, #c8732a, #7a3d12); }
 .stallion-visual .initial { font-family: var(--serif); font-size: 5.5rem; font-weight: 600; opacity: .9; }
-.stallion-visual .tag {
+.stallion-visual { overflow: hidden; }
+.stallion-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.stallion-visual .tag { z-index: 1;
   position: absolute; left: 16px; top: 16px; background: var(--orange); color: #fff;
   font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
   padding: 6px 10px; border-radius: 999px;
