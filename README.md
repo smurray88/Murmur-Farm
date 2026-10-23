@@ -25,3 +25,5 @@ A modern, mobile-first redesign of [murmurfarm.com](https://murmurfarm.com) — 
 GitHub Pages: **Settings → Pages → Deploy from a branch → `main` / root**. The site appears at `https://smurray88.github.io/murmur-farm/`.
 
 Images are currently linked from the existing murmurfarm.com site. Before pointing the murmurfarm.com domain here, copy those images into `photos/` and update the links.
+
+**After editing `assets/styles.css` or `assets/site.js`**, bump the `?v=` number on those links in every page so phones don't keep showing the old version.
