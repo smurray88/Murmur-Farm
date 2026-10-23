@@ -1,10 +1,12 @@
 // Shared header, footer and small interactions for every page.
 (function () {
+  var FACEBOOK = "https://www.facebook.com/share/1CnTeYEJyW/";
   var pages = [
     ["index.html", "Home"],
     ["blofeld.html", "Blofeld"],
     ["warrant.html", "Warrant"],
     ["history.html", "Our History"],
+    ["news.html", "News"],
     ["gallery.html", "Gallery"],
     ["for-sale.html", "For Sale"]
   ];
@@ -50,13 +52,32 @@
           "<div><h4>Murmur Farm</h4><p>A family-run Thoroughbred nursery and breeding farm on 131 acres in Harford County, Maryland. Est. 1961.</p></div>" +
           "<div><h4>Visit</h4><p>1334 Stafford Road<br>Darlington, Maryland 21034</p>" +
             '<a href="https://www.google.com/maps/search/?api=1&query=1334+Stafford+Road+Darlington+MD+21034">Get directions →</a></div>' +
-          '<div><h4>Contact</h4><ul><li><a href="tel:+14108363491">(410) 836-3491</a></li><li>Fax (410) 836-3489</li><li><a href="mailto:murmurfarm@verizon.net">murmurfarm@verizon.net</a></li></ul></div>' +
+          '<div><h4>Contact</h4><ul><li><a href="tel:+14108363491">(410) 836-3491</a></li><li>Fax (410) 836-3489</li><li><a href="mailto:murmurfarm@verizon.net">murmurfarm@verizon.net</a></li><li><a href="' + FACEBOOK + '" rel="noopener">Facebook</a></li></ul></div>' +
           '<div><h4>Explore</h4><ul>' + pages.map(function (p) { return '<li><a href="' + p[0] + '">' + p[1] + "</a></li>"; }).join("") + "</ul></div>" +
         "</div>" +
         '<div class="footer-bottom"><span>© ' + new Date().getFullYear() + " Murmur Farm · Mrs. Audrey Murray</span>" +
           '<a href="https://marylandthoroughbred.com/cms/index.php/directory-home/22-murmur-farm">Member listing · Maryland Horse Breeders Association</a></div>' +
       "</div>";
   }
+
+  // News & Results: any <ul data-news="N"> is filled from data/news.json,
+  // which a GitHub Action refreshes every day.
+  var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  function esc(t) { var d = document.createElement("div"); d.textContent = t; return d.innerHTML; }
+  document.querySelectorAll("[data-news]").forEach(function (list) {
+    var limit = parseInt(list.getAttribute("data-news"), 10) || 20;
+    fetch("data/news.json", { cache: "no-cache" })
+      .then(function (r) { return r.json(); })
+      .then(function (items) {
+        list.innerHTML = items.slice(0, limit).map(function (n) {
+          var p = n.date.split("-");
+          var when = MONTHS[parseInt(p[1], 10) - 1] + " " + p[0];
+          return '<li><a href="' + esc(n.url) + '" rel="noopener"><small>' + esc(n.source) + " · " + when +
+            "</small><strong>" + esc(n.title) + "</strong></a></li>";
+        }).join("");
+      })
+      .catch(function () { list.innerHTML = '<li class="muted">News is unavailable right now.</li>'; });
+  });
 
   // Gentle fade-in on scroll
   var els = document.querySelectorAll(".reveal");

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Murmur Farm racing silks">
+  <defs>
+    <pattern id="harlequin" width="24" height="32" patternUnits="userSpaceOnUse" x="4" y="4">
+      <rect width="24" height="32" fill="#e07a1f"/>
+      <path d="M12 0 L24 16 L12 32 L0 16 Z" fill="#1d3b25"/>
+    </pattern>
+    <clipPath id="body">
+      <path d="M70 62 Q100 74 130 62 L134 168 Q100 176 66 168 Z"/>
+    </clipPath>
+  </defs>
+  <!-- cap -->
+  <path d="M74 44 A26 31 0 0 1 126 44 Z" fill="#e07a1f"/>
+  <path d="M100 13 L100 44 L87 44 Q90 22 100 13 Z" fill="#1d3b25"/>
+  <path d="M100 13 Q110 22 113 44 L126 44 Q118 24 100 13 Z" fill="#1d3b25"/>
+  <path d="M66 44 H138 Q138 50 130 50 H70 Q66 50 66 44 Z" fill="#1d3b25"/>
+  <!-- sleeves -->
+  <path d="M70 62 Q48 70 40 100 L30 150 L50 154 L60 112 L68 96 Z" fill="#e07a1f" stroke="#1d3b25" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M130 62 Q152 70 160 100 L170 150 L150 154 L140 112 L132 96 Z" fill="#e07a1f" stroke="#1d3b25" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M33 134 L53 138 L50 154 L30 150 Z" fill="#1d3b25"/>
+  <path d="M167 134 L147 138 L150 154 L170 150 Z" fill="#1d3b25"/>
+  <!-- body -->
+  <g clip-path="url(#body)"><rect x="60" y="56" width="80" height="124" fill="url(#harlequin)"/></g>
+  <path d="M70 62 Q100 74 130 62 L134 168 Q100 176 66 168 Z" fill="none" stroke="#1d3b25" stroke-width="3" stroke-linejoin="round"/>
+  <!-- collar -->
+  <path d="M86 63.5 Q100 72 114 63.5 L114 69 Q100 77 86 69 Z" fill="#1d3b25"/>
+</svg>
