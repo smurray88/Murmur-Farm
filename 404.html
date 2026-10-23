@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found · Murmur Farm</title>
+  <meta name="description" content="This page has moved. Find Murmur Farm's stallions, history and contact details here.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1d3b25">
+  <script>
+    // Old murmurfarm.com links (Blofeld.html, Warrant.html, default.html) go to the new pages.
+    (function () {
+      var map = { "blofeld.html": "blofeld.html", "warrant.html": "warrant.html", "default.html": "index.html",
+                  "default.htm": "index.html", "index.htm": "index.html" };
+      var parts = location.pathname.split("/");
+      var name = (parts.pop() || "").toLowerCase();
+      if (map[name]) location.replace(parts.join("/") + "/" + map[name]);
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/Murmur-Farm/assets/styles.css">
+</head>
+<body>
+<main>
+  <section class="section">
+    <div class="wrap">
+      <div class="empty">
+        <h1>Page not found</h1>
+        <p class="muted">That page may have moved when the site was updated.</p>
+        <div class="btn-row mt-1" style="justify-content:center">
+          <a class="btn btn-primary" href="/Murmur-Farm/">Go to the home page</a>
+          <a class="btn btn-ghost" href="tel:+14108363491">Call (410) 836-3491</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

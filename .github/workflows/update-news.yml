@@ -1,4 +1,4 @@
-name: Update news & results
+name: Update news & rebuild pages
 
 on:
   schedule:
@@ -6,28 +6,49 @@ on:
   workflow_dispatch:         # "Run workflow" button in the Actions tab
   push:
     paths:
-      - scripts/update_news.py
-      - .github/workflows/update-news.yml
+      - "scripts/**"
+      - "data/**"
+      - "*.html"
+      - ".github/workflows/update-news.yml"
 
 permissions:
   contents: write
+
+concurrency:
+  group: rebuild
+  cancel-in-progress: false
 
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Copy the farm's photos from murmurfarm.com (first run only)
+        continue-on-error: true
+        run: |
+          mkdir -p photos
+          for pair in Sign.jpg:sign.jpg banner1.jpg:banner.jpg Blofeld.jpg:blofeld.jpg Warrant.jpg:warrant.jpg; do
+            src="${pair%%:*}"; dst="photos/${pair##*:}"
+            [ -f "$dst" ] || curl -fsSL --max-time 30 "https://murmurfarm.com/$src" -o "$dst" || rm -f "$dst"
+          done
+          ls -la photos
+
       - name: Fetch latest news
         run: python3 scripts/update_news.py
+
+      - name: Rebuild pages
+        run: python3 scripts/build.py
+
       - name: Save if anything changed
         run: |
-          if git diff --quiet data/news.json; then
-            echo "No new stories."
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nothing changed."
           else
             git config user.name "murmur-farm-news-bot"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/news.json
-            git commit -m "Update news & results"
+            git commit -m "Update news & rebuild pages"
             git pull --rebase origin main
             git push
           fi
